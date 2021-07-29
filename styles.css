@@ -1,0 +1,91 @@
+html {
+    
+    min-height: 100%;
+}
+
+body {
+    padding-top: 4.5rem;
+    margin: 10px;
+}
+
+#listM li {
+    padding-left: 20px;
+}
+
+#brandName {
+	font:normal 180% 'century gothic', arial;
+	padding: 10px 0 5px 20px;
+	color: #fff;
+}
+
+#mainNav {
+    font-size: 200%;
+    margin: 0;
+}
+
+
+button.navbar-toggler {
+    margin-right: 20px;
+}
+
+button#menu-btn {
+    background-color: #212529;
+    color: #fff;
+}
+
+.menubar {
+	width: 50%;
+	height: 36px;
+    float: right;
+    margin: 20px 0 10px 0;
+    display: none;
+} 
+
+.navigation {
+    float: left;
+    width: 50%;
+	height: 60px;
+}
+.navigation span {
+    width: 110px;
+    float: left;
+    margin: 20px 0 0 20px;
+    padding: auto;
+}
+.navigation h1 {
+    width: 200px;
+    float: left;
+}
+
+
+.menubar-btn {
+    float: right;
+    margin: 10px 20px 0 10px;
+}
+
+ul.menu {
+	float: right;
+}
+
+ul.menu li {
+	float: left;
+	list-style: none;
+}
+.buttonBase {
+font: normal 115% 'trebuchet ms', sans-serif;
+display: block;
+height: 30px;
+color: #fff;
+text-decoration: none;
+margin: 0 5px 0 1px; 
+}
+
+.buttonBase:hover {
+	color: #615863;
+    border: darkslategray;
+}
+
+ul.menu li.selected span {
+	color: #615863;
+    border: darkslategray;
+}
