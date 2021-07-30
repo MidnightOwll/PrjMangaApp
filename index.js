@@ -10,7 +10,9 @@ function createWindow() {
     win = new BrowserWindow({
         width: 900, 
         height: 600, 
-        icon: __dirname + '/img/icon.png'
+        icon: __dirname + '/img/icon.png',
+        minWidth: 400, 
+        minHeight: 400
     })
 
     
