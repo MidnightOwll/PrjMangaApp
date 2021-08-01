@@ -13,7 +13,7 @@
   <body class="bg-dark m-3 text-muted">  
     <!--    Шапка сайта    -->
     <header>        
-        <div class="fixed-top bg-dark border-bottom"> 
+        <div class="fixed-top bg-dark border-bottom scrll"> 
 
             <div class="container navigation"> 
                 <h1 id="brandName">MangaApp</h1>
@@ -31,7 +31,7 @@
 
                 <div class="menubar-btn btn-group">
                     <button type="button" class="btn" data-bs-toggle="dropdown" id="menu-btn" aria-expanded="false">
-                        <span class="buttonBase pt-1">something</span>
+                        <span class="buttonBase">something</span>
                     </button>
                     <ul class="dropdown-menu bg-dark text-white" id="listM" aria-labelledby="menu-btn"> </ul> 
                 </div>
@@ -88,47 +88,51 @@
             }, 1000)
             // меню
             $('#menubarList').clone().appendTo('#listM')
-           
-            
-             // $('#searchLab').focus(() => {
-            //     $('.navigation').hide()
-            //     $('.menubar-btn').hide()
-            //     $('.menu').hide()
-            //     $('.menubar').css('width', '100%')
-            //     $('.form-inline').css('width', '100%')
-            //     $('#searchLab').css('width','80%')
-            // })
-
-            // $('#searchLab').focusout(() => {
-            //     $('.navigation').show()
-            //     if ($(window).width() < 857){
-            //         $('.menubar-btn').show()                    
-            //     } else {
-            //         $('.menu').show()
-            //     }
-            //     $('.menubar').css('width', '')
-            //     $('.form-inline').css('width', '')
-            //     $('#searchLab').css('width','')
-            // })
-
-             $('#searchLab').focus(() => {
+                      
+            // отображение поисковой формы 
+            $('#searchLab').focus(() => {
                 $('.navigation').css('display', 'none')
                 $('.menubar-btn').css('display', 'none')
                 $('.menu').css('display', 'none')
-                $('.menubar').css('width', '100%')
+                $('.menubar').css({
+                    'width': '100%',
+                    'padding': '0 20% 0 20%'
+                }).removeClass('container')
                 $('.form-inline').css('width', '100%')
-                $('#searchLab').css('width','80%')
+                $('#searchLab').css('width','85%')
             })
 
             $('#searchLab').focusout(() => {
                 $('.navigation').css('display', '')
                 $('.menubar-btn').css('display', '')
                 $('.menu').css('display', '')
-                $('.menubar').css('width', '')
+                $('.menubar').css({
+                    'width': '',
+                    'padding': ''
+                }).addClass('container')
                 $('.form-inline').css('width', '')
                 $('#searchLab').css('width','')
             })
-           
+
+                       
+            // Scroll для основного меню
+            const $scrll = $(".scrll")
+            let prevScroll
+            let lastShowPos
+
+            $(window).on("scroll", () => {
+            const scrolled = $(window).scrollTop()
+
+                if (scrolled > 100 && scrolled > prevScroll) {
+                    $scrll.addClass("menu-out")
+                    lastShowPos = scrolled
+                } else if (scrolled <= Math.max(lastShowPos - 150, 0)) {
+                    $scrll.removeClass("menu-out")
+                }
+                prevScroll = scrolled
+            })
+
+                       
 
          </script>
    </body>

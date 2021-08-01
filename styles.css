@@ -8,8 +8,9 @@ body {
     margin: 10px;
 }
 
+
 #listM li {
-    padding-left: 20px;
+    padding: 0 20% 0 20%;
 }
 
 #brandName {
@@ -18,11 +19,21 @@ body {
     margin: 10px 0 0 0;
 	color: #fff;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
 
 #mainNav {
     font-size: 200%;
     margin: 0;
+}
+
+.scrll {
+    transition: all 0.5s;
+}
+
+.scrll.menu-out {
+    transform: translateY(-100%);
 }
 
 div.menubar-btn {
@@ -33,9 +44,18 @@ button.navbar-toggler {
     margin-right: 20px;
 }
 
-#menu-btn {
+button#menu-btn {
     background-color: #212529;
     color: #fff;
+    border-radius: 20px 20px 20px 20px;
+    height: 38px; 
+    margin: 10px 0 0 0;
+    padding: 0;   
+}
+
+button#menu-btn span {
+    margin: 0;
+    padding: 0;    
 }
 
 div.menubar {
@@ -103,13 +123,15 @@ form[role="search"] button {
 }
 
 .buttonBase {
-font: normal 115% 'trebuchet ms', sans-serif;
-display: block;
-height: 38px;
-line-height: 38px;
-color: #fff;
-text-decoration: none;
-margin: 0 5px 0 1px; 
+    font: normal 115% 'trebuchet ms', sans-serif;
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 5px 0 1px; 
+    cursor: pointer;
+    user-select: none;
 }
 
 
