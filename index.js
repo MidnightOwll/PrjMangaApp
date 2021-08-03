@@ -12,7 +12,7 @@ function createWindow() {
         height: 600, 
         icon: __dirname + '/img/icon.png',
         minWidth: 400, 
-        minHeight: 400
+        minHeight: 400,
     })
 
     
@@ -22,7 +22,7 @@ function createWindow() {
         slashes: true
     }))
 
-    
+     
 
     win.webContents.openDevTools();
 
