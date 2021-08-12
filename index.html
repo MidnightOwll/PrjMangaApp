@@ -156,19 +156,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script>
         //
-        
+        let manga = []
         $.get( 'https://api.mangadex.org/manga?limit=20', (mangaList) => {
                     //console.log(mangaList)
                     const titleList = mangaList.results
                    // console.log(titleList)
-                   let manga = []
+                   
                    // извлечение данных
                    $.each(titleList, (num, rez) => {
                        //console.log(num, rez)
                        manga[num] = {}
                        $.each(rez, (key, val) => {
                            //console.log(key , val)                      
-                       
                             if (key === 'data') {
                                 
                                     $.extend(manga[num], {id: val.id})
@@ -176,38 +175,44 @@
                                     $.extend(manga[num], {description: val.attributes.description.en})                                                    
                                 
                             } else if (key === 'relationships') {                            
-                                    $.each(val, (idx, value) => {
-                                        if(value['type']  === 'author') {
-                                            $.extend(manga[num], {authorId: value.id}) 
-                                        } else if(value['type']  === 'cover_art'){
-                                            $.extend(manga[num], {coverId: value.id})
-                                        }
-                                        //ХЗ где взять теги...
-                                    })        
-                                    
-                                   
-                                    
-                                }
-                       
-                       
+                                $.each(val, (idx, value) => {
+                                    if(value['type']  === 'author') {
+                                        $.extend(manga[num], {author: {authorId: value.id}}) 
+                                    } else if(value['type']  === 'cover_art'){
+                                        $.extend(manga[num], {cover: {coverId: value.id}})
+                                    }
+                                    //ХЗ где взять теги...
+                                })                                  
+                            }                      
                         })
                         
-                        console.log(manga[num])
-                    })
-                    // работа с данными
-                    $('#title').text(manga[0].title)
-                    $.get( `https://api.mangadex.org/author/${manga[0].authorId}`, (authorList) => {
-                        //console.log(authorList)
-                        $('#author').text(authorList.data.attributes.name)
-                    })
-                    $.get(`https://api.mangadex.org/cover/${manga[0].coverId}`, (coverList) => {
-                        $('#img').attr('src', `https://uploads.mangadex.org/covers/${manga[0].id}/${coverList.data.attributes.fileName}`)
-                    })
-                   
+                        $.get( `https://api.mangadex.org/author/${manga[num].author.authorId}`, (authorList) => {
+                            //console.log(authorList)
+                            $.extend(manga[num].author, {authorName: authorList.data.attributes.name}) 
+                        })
+                        $.get(`https://api.mangadex.org/cover/${manga[num].cover.coverId}`, (coverList) => {
+                            $.extend(manga[num].cover, {imgName: coverList.data.attributes.fileName}) 
+                            
+                        })
+                        //console.log(manga[num])
+                    })                 
                    
                 },
                 "json"
             )
+
+             //работа с данными
+             
+             function dataWork() {
+                $('#title').text(manga[0].title)
+                $('#author').text(manga[0].author.authorName)
+                $('#img').attr('src', `https://uploads.mangadex.org/covers/${manga[0].id}/${manga[0].cover.imgName}`)
+            }
+            setTimeout(dataWork, 500)
+           
+                   
+
+            console.log(manga)
             
             
            /* setTimeout(()=>{
