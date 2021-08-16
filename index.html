@@ -215,35 +215,6 @@
             console.log(manga)
             
             
-           /* setTimeout(()=>{
-                const titleList =  mangaList.responseJSON['results']//[0]['data']['attributes']['altTitles'][5]['en']
-                let mangaIds = []
-                let mangaCoverArtIds = []
-                let mangaArtImgs = []
-                $.each(titleList, (key,value) => {
-                   // console.log(value['data']['attributes']['title']['en'])
-                     mangaIds.push(value['data']['id'])
-                    //const mangaCoverArtId = value['relationships']['2']['id']
-                    
-                    $.each(value['relationships'], (key2, value2) => {
-                        if(value2['type']  === 'cover_art'){
-                            mangaCoverArtIds.push(value2['id'])
-                            const coverList =  $.get(`https://api.mangadex.org/cover/${value2['id']}`, () => {},"json")
-                            setTimeout(()=>{                        
-                                mangaArtImgs.push(coverList.responseJSON['data']['attributes']['fileName'])
-                                //console.log(mangaArtImgs)
-                            }, 500)
-                        }                            
-                    })               
-                    
-                })
-                //console.log(mangaIds[0], mangaArtImgs[0])
-                console.log( mangaArtImgs)
-                setTimeout(()=>{
-                 $('.manga-img').attr('src', `https://uploads.mangadex.org/covers/${mangaIds[0]}/${mangaArtImgs[0]}`)
-                }, 600)
-            }, 1000)
-
             
             // меню
             $('#menubarList').clone().appendTo('#listM')
@@ -292,7 +263,7 @@
             })
 
                        
-*/
+
          </script>
    </body>
 </html>
