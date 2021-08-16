@@ -61,9 +61,18 @@
                 
     </header>
         <!--    Основной контент     -->
-    <div class="container row text-muted" id="main_content">
+    <div class="container" >
+        <div class="row" id="main_content"></div>
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-secondary text-center" role="status">
+            
+            </div>
+        </div>
+              
 
-        <div class="row text-muted">
+        
+
+        <!-- <div class="row text-muted">
 
             <div class="col-lg-4 manga-block">
                 <div class="row border">
@@ -138,9 +147,9 @@
 
           
                      
-        </div>
+        </div> -->
 
-        <div class="margin-8"></div>
+        
     </div>
 
     <footer>
@@ -157,7 +166,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src= './getManga.js'></script>
     <script id = 'currentManga' type="text/template">
-        <div class="col-lg-4 manga-block">
+        <div class="col-lg-4 manga-block text-muted">
             <div class="row border">
                 <div class="col-6">
                     <img class="manga-img" id="img" src= {{ coverLink }}>
@@ -186,34 +195,56 @@
         let mangaList = new MangaList();
         let main_cont = document.getElementById('main_content');
         let currentManga = document.querySelector('#currentManga').innerHTML
-        var template = Handlebars.compile(currentManga);
+        let template = Handlebars.compile(currentManga);
         // в качестве параметра функции выступает массив, 
         // ключем и значениями которого выступают параметры для запроса на АПИ
-        mangaList.getMangaList({'limit':15}).done((list)=>{
+       // console.log(mangaList.getMangaList({'limit':15}))
+        
+
+       mangaList.getMangaList({'limit':15}).then(list => {
             $.each(list, (num, rez) => {
-                
-                let promiseManga = new Promise((resolve, reject)=>{
-                    let oneManga = mangaList.mangaListProcess(rez)
-                    resolve(oneManga)
-
-                })
-                promiseManga.then(
-                    oneManga1 =>{
-                        setTimeout(()=>{
-                            console.log(oneManga1.author)
-                            let result = template(oneManga1)
-                            main_cont.insertAdjacentHTML('afterend', result)
-                        },10)
-
+                    //console.log(rez)
+                    //console.log(mangaList.getAuthor(rez.relationships[0].id) )
+                    // let oneManga = mangaList.mangaListProcess(rez).then(oneManga => {
+                    //     console.log(oneManga)
+                    //     let result = template(oneManga)
+                    //     main_cont.insertAdjacentHTML('afterend', result)
+                    // })    
+                    
+                  
+                    const oneManga = mangaList.mangaListProcess(rez)
+                    console.log(oneManga)
+                    setTimeout(() =>{
+                        let result = template(oneManga)
+                        $('#main_content').append(result)
+                        // main_cont.insertAdjacentHTML('afterend', result)
                     }
-                )
-                //console.log(result)
-                //main_cont.append($.parseHTML(result))
-                //result = $.parseHTML(result)
+                    ,3000)
+                    // .then((manga) => {
+                    //     console.log(manga)
+                    //     let result = template(manga)
+                    //     main_cont.insertAdjacentHTML('afterend', result)
+                    // })
+                   
+                   
+                    // .then(manga => {
+                    //     console.log(manga)
+                    //     let result = template(manga)
+                    //     main_cont.insertAdjacentHTML('afterend', result)
+                    // })              
+                    
+                                       
+
+                    //console.log(result)
+                    //main_cont.append($.parseHTML(result))
+                    //result = $.parseHTML(result)
             })
-        }).fail(function(jqXHR, textStatus, errorThrown){
-            alert("The AJAX request failed:" + errorThrown);
-        });
+        })
+      // console.log(list)
+        
+        // }).fail(function(jqXHR, textStatus, errorThrown){
+        //     alert("The AJAX request failed:" + errorThrown);
+        // });
 
         /*
         $.get( 'https://api.mangadex.org/manga?limit=20', (mangaList) => {
