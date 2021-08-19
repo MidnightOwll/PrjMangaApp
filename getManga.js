@@ -1,120 +1,52 @@
 class MangaList{
 
-    getMangaList(params){
+    async getMangaList(params){
         const url = 'https://api.mangadex.org/manga'
 
-        return  $.get(url, params).pipe(function(json) {
-            return json.results
-        })
+        const data = await $.get(url, params).pipe(function(json) {return json})
+        return data.results
+        
     }
-    getCover(id,coverId){
+    async getCover(id,coverId){
         const url = `https://api.mangadex.org/cover/${coverId}`
-        return $.get(url).pipe(function(coverList) {
-            return `https://uploads.mangadex.org/covers/${id}/${coverList.data.attributes.fileName}`
+        const fileName = await $.get(url).pipe(function(coverList) {
+            return coverList.data.attributes.fileName
         })
+        return `https://uploads.mangadex.org/covers/${id}/${fileName}`
     }
-    getAuthor(authorId){
+    async getAuthor(authorId){
         const url = `https://api.mangadex.org/author/${authorId}`
-        return $.get(url).pipe(function(authorList) {
+        const authorName = $.get(url).pipe(function(authorList) {
             return authorList.data.attributes.name
         })
+        return authorName
     }
     async getDate(params){
 
     }
 
-
-    mangaListProcess(mangaList){
+    async mangaListProcess(mangaList){
         let manga=[]
-       
         $.each(mangaList, (key, val) => {
-
-            // let promiseRequest = new Promise((resolve, reject)=>{
-            //     resolve(() => {
-            if (key === 'data') {          
-                    
+            if (key === 'data') {              
                 $.extend(manga, {id: val.id})
-                $.extend(manga, {title: val.attributes.title.en})
-                $.extend(manga, {description: val.attributes.description.en})   
-                                                                    
+                $.extend(manga, {title: val.attributes.title.en ||  val.attributes.title.jp})
+                $.extend(manga, {description: val.attributes.description.en})                                                       
             }
-                // })
-                // reject(null)
-            // })
-            // promiseRequest.then((data) => {
-            //     data()
             else if (key === 'relationships') {                            
                 $.each(val, (idx, value) => {
                     if(value['type']  === 'author') {
                         $.extend(manga, {authorId: value.id})
-                        this.getAuthor(manga.authorId)
-                        .then(author => $.extend(manga, {author: author}))
-                        
-                        // let promiseAuthorRequest = new Promise((resolve, reject)=>{
-                        //     resolve(this.getAuthor(manga.authorId))
-                        //     reject(null)
-                        
-                        // })
-                        // promiseAuthorRequest.then(author=>{
-                        //    // console.log(author)
-                        //     $.extend(manga, {author: author})
-                        // })
                     } else if(value['type']  === 'cover_art'){
                         $.extend(manga, {coverId: value.id})
-                        this.getCover(manga.id,manga.coverId)
-                        .then(link => $.extend(manga, {coverLink: link}))
-                        // let promiseCoverRequest = new Promise((resolve, reject)=>{
-                        //     resolve(this.getCover(manga.id,manga.coverId))
-                        //     reject(null)                                
-                        // })
-                        // promiseCoverRequest.then(link=>{
-                        //     return $.extend(manga, {coverLink: link})
-                        // })
-                        
                     }
-                    
-                    
                 })         
             }
-            // })
-            
-
-            // if (key === 'data') {          
-                              
-            //     $.extend(manga, {id: val.id})
-            //     $.extend(manga, {title: val.attributes.title.en})
-            //     $.extend(manga, {description: val.attributes.description.en})   
-                                                                    
-            // } else if (key === 'relationships') {                            
-            //     $.each(val, (idx, value) => {
-            //         if(value['type']  === 'author') {
-            //             $.extend(manga, {authorId: value.id})
-            //             let promiseAuthorRequest = new Promise((resolve, reject)=>{
-            //                 resolve(this.getAuthor(manga.authorId))
-            //                 reject(null)
-                        
-            //             })
-            //             promiseAuthorRequest.then(author=>{
-            //                 $.extend(manga, {author: author})
-            //             })
-            //         } else if(value['type']  === 'cover_art'){
-            //             $.extend(manga, {coverId: value.id})
-            //             let promiseCoverRequest = new Promise((resolve, reject)=>{
-            //                 resolve(this.getCover(manga.id,manga.coverId))
-            //                 reject(null)                                
-            //             })
-            //             promiseCoverRequest.then(link=>{
-            //                 $.extend(manga, {coverLink: link})
-            //             })
-            //         }
-            //     })         
-            // }
         })
-        
-        return manga
-        
-                   //console.log(manga)
-      
+        manga.author = await this.getAuthor(manga.authorId)
+        manga.coverLink = await this.getCover(manga.id,manga.coverId)
+
+        return manga      
     }
 
     
