@@ -210,55 +210,79 @@
                 })
             })
         })
+
+        //нужно будут привязать к роуту главного меню 
+        //scroll для manga list
+        
+        let offset=15 //переменная счетчик
+        //функция загрузки
+        // тут есть пробрема. если при скролле не ждать пока заполнитяся данные появляется ошибка 
+        $(window).scroll(() => {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                mangaList.getMangaList({'limit':15, 'offset':offset}).then(list => {
+                    console.log(list)
+                    $.each(list, (num, rez) => {
+                        const oneManga = mangaList.mangaListProcess(rez).then(oneManga =>{
+                            console.log(oneManga)
+                            let result = template(oneManga)
+                            $('#main_content').append(result)
+                        })
+                    })
+                    offset +=15
+                    console.log(offset)
+                })       
+            }
+        })
+
       
-            // меню
-            $('#menubarList').clone().appendTo('#listM')
-                      
-            // отображение поисковой формы 
-            $('#searchLab').focus(() => {
-                $('.navigation').css('display', 'none')
-                $('.menubar-btn').css('display', 'none')
-                $('.menu').css('display', 'none')
-                $('.menubar').css({
-                    'width': '100%',
-                    'padding': '0 10% 0 10%'
-                }).removeClass('container')
-                $('.form-inline').css('width', '100%')
-                $('#searchLab').css('width','85%')
-            })
+        // меню
+        $('#menubarList').clone().appendTo('#listM')
+                    
+        // отображение поисковой формы 
+        $('#searchLab').focus(() => {
+            $('.navigation').css('display', 'none')
+            $('.menubar-btn').css('display', 'none')
+            $('.menu').css('display', 'none')
+            $('.menubar').css({
+                'width': '100%',
+                'padding': '0 10% 0 10%'
+            }).removeClass('container')
+            $('.form-inline').css('width', '100%')
+            $('#searchLab').css('width','85%')
+        })
 
-            $('#searchLab').focusout(() => {
-                $('.navigation').css('display', '')
-                $('.menubar-btn').css('display', '')
-                $('.menu').css('display', '')
-                $('.menubar').css({
-                    'width': '',
-                    'padding': ''
-                }).addClass('container')
-                $('.form-inline').css('width', '')
-                $('#searchLab').css('width','')
-            })
+        $('#searchLab').focusout(() => {
+            $('.navigation').css('display', '')
+            $('.menubar-btn').css('display', '')
+            $('.menu').css('display', '')
+            $('.menubar').css({
+                'width': '',
+                'padding': ''
+            }).addClass('container')
+            $('.form-inline').css('width', '')
+            $('#searchLab').css('width','')
+        })
+
+                    
+        // Scroll для основного меню
+        const $scrll = $(".scrll")
+        let prevScroll
+        let lastShowPos
+
+        $(window).on("scroll", () => {
+        const scrolled = $(window).scrollTop()
+
+            if (scrolled > 100 && scrolled > prevScroll) {
+                $scrll.addClass("menu-out")
+                lastShowPos = scrolled
+            } else if (scrolled <= Math.max(lastShowPos - 150, 0)) {
+                $scrll.removeClass("menu-out")
+            }
+            prevScroll = scrolled
+        })
 
                        
-            // Scroll для основного меню
-            const $scrll = $(".scrll")
-            let prevScroll
-            let lastShowPos
 
-            $(window).on("scroll", () => {
-            const scrolled = $(window).scrollTop()
-
-                if (scrolled > 100 && scrolled > prevScroll) {
-                    $scrll.addClass("menu-out")
-                    lastShowPos = scrolled
-                } else if (scrolled <= Math.max(lastShowPos - 150, 0)) {
-                    $scrll.removeClass("menu-out")
-                }
-                prevScroll = scrolled
-            })
-
-                       
-
-         </script>
+    </script>
    </body>
 </html>
