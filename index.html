@@ -63,12 +63,53 @@
         <!--    Основной контент     -->
     <div class="container" >
         <div class="row" id="main_content"></div>
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border text-secondary text-center" role="status">
-            
+<!-- разметка для катрочки манги -->
+       <!-- <div class="row manga-card text-white">
+           <div class="col-lg-3">
+               <img id="mangaCover" src="https://uploads.mangadex.org/covers/32d76d19-8a05-4db0-9fc2-e0b0648fe9d0/f5873770-80a4-470e-a11c-63b709d87eb3.jpg" alt="#" />
+               <button type="button" class="btn btn-outline-light btn-full" id="read-btn">
+                    <span>Read</span>
+                </button>
+                <button type="button" class="btn btn-outline-light btn-full" id="info-btn">
+                    <span>Info</span>
+                </button>
             </div>
-        </div>
-              
+           <div class="col-lg-9">
+               <div class="container-box flex">
+                    <div class="box">
+                        <span class="title-text"  id="title"> {{title}} </span>
+                    </div>
+                    <div class="box">
+                        <span>Author: </span><span id="author">{{author}}</span>                            
+                    </div>
+                    <div class="box">
+                        <span>Teg: </span> <span class="tags">Default</span>  <span class="tags">Default</span>
+                        <span class="tags">Default</span><span class="tags">Default</span>
+                        <span class="tags">Default</span><span class="tags">Default</span>
+                        <span class="tags">Default</span><span class="tags">Default</span>                     
+                        <span class="tags">Default</span><span class="tags">Default</span>
+                        <span class="tags">Default</span><span class="tags">Default</span>
+                        <span class="tags">Default</span><span class="tags">Default</span>
+                    </div>
+                    <div class="box">
+                        <span>Description:</span><span id="description">{{description}}</span>                            
+                    </div>
+                    <div class="box flex-grow">
+                        <span>{{Какойто текст или еще что}}</span>  
+                        <p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+                            "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+                            "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
+
+
+
+                        </p>                          
+                    </div>
+               </div>
+            
+           </div>
+       </div> -->
+<!-- ---------------------- -->
+        
 
         
 
@@ -153,7 +194,7 @@
     </div>
 
     <footer>
-    	<div class="container fixed-bottom">
+    	<div class="bg-dark">
     		<p class="text-center"><a href="#">MangaApp</a></p>
     	</div>
     </footer>
@@ -166,10 +207,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src= './getManga.js'></script>
     <script id = 'currentManga' type="text/template">
-        <div class="col-lg-4 manga-block text-muted">
+        <div class="col-lg-4 manga-block text-white">
             <div class="row border">
                 <div class="col-6">
-                    <img class="manga-img" id="img" src= {{ coverLink }}>
+                    <img class="manga-img" id="img" src= {{ coverLink }} />
                 </div>
                
                 <div class="col-6 flex">
@@ -180,10 +221,10 @@
                         <span>Author: </span><span id="author">{{author}}</span>                            
                     </div>
                     <div class="manga-box">
-                        <span>Teg: </span> <div id="tegs"><span>1111</span><span>2222</span><span>3333</span></div>                            
+                        <span>Teg: </span> <div><span class="tags">1111</span><span class="tags">2222</span><span class="tags">3333</span></div>                            
                     </div>
                     <div class="manga-box flex-grow">
-                        <span>Description:</span><span id="description">{{description}}</span>                            
+                        <span>Description: </span><span id="description">{{description}}</span>                            
                     </div>                        
                 </div>	
             </div>                
@@ -200,8 +241,10 @@
         // ключем и значениями которого выступают параметры для запроса на АПИ
        // console.log(mangaList.getMangaList({'limit':15}))
 
+
        mangaList.getMangaList({'limit':15}).then(list => {
            console.log(list)
+            
             $.each(list, (num, rez) => {
                 const oneManga = mangaList.mangaListProcess(rez).then(oneManga =>{
                     console.log(oneManga)
