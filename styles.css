@@ -28,6 +28,7 @@ body {
     margin: 0;
 }
 
+
 .scrll {
     transition: all 0.5s;
 }
@@ -145,13 +146,8 @@ ul.menu li.selected span {
 }
     /*main_content*/
 
-.flex {
-    display: flex;
-    flex-direction: column;
-}
-
-.flex-grow {
-    flex-grow:4;
+.manga-block {
+    height: 310px;
 }
 
 .manga-block span {
@@ -162,35 +158,45 @@ ul.menu li.selected span {
      
 }
 
-span#title {
+.manga-box > span#title {
     font: normal 105% 'URW Chancery L', cursive;
     text-align: center;
     overflow: hidden;
+    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;  
-    -webkit-line-clamp: 2;    
+    -webkit-line-clamp: 2;   
 }
 
-div#tegs span{
-    font: 80%;
+.tags{
+    font-size: 75%;
     display: inline-block;
     margin-left: 5px;
-    padding: 3px;
+    padding: 0 3px;
     border: solid 1px #fff;
-    border-radius: 20%;
+    border-radius: 10rem;
     
 }
+.flex {
+    display: flex;
+    flex-direction: column;
+}
 
-span#author {
+.flex-grow {
+    flex-grow:4;
+}
+
+.manga-box > span#author {
     width: auto;
     overflow: hidden;
+    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;  
     -webkit-line-clamp: 1;
 }
 
-span#description {
-    width: auto;
+.manga-box > span#description {
+    width: auto;    
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;  
@@ -208,7 +214,7 @@ span#description {
 }
 
 .manga-block img {
-	height: 100%;
+	height: auto;
 	width: 100%;
     line-height: 100%;
 }
@@ -260,4 +266,51 @@ span#description {
         width: 45%;
     }
 }
+
+/*страница манги*/
+/*
+#mangaCover {
+    width: 100%;
+    height: auto;
+    border: solid 6px #776b63;
+    border-radius: 7px;  
+}
+#title {
+    font: normal 105% 'URW Chancery L', cursive;
+    text-align: center; 
+}
+
+.manga-card {
+    border: solid 2px #e7e4e2;
+    border-radius: 3px;
+}
+
+.manga-card > .col-lg-3 {
+    padding: 2px 0 2px 4px;
+}
+
+
+.btn-full {
+    padding: 3px 6px !important;
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+
+
+
+.container-box {
+    min-height: auto;
+}
+
+.box {
+    padding: 10px 3% 0 3%;
+}
+
+.box:last-child {
+    padding-bottom: 10px;
+}
+
+
 
