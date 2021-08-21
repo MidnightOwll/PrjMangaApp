@@ -45,6 +45,7 @@ class MangaList{
         })
         manga.author = await this.getAuthor(manga.authorId)
         manga.coverLink = await this.getCover(manga.id,manga.coverId)
+        manga.mangaUrl = document.location.pathname + '#manga/'+manga.id;
 
         return manga      
     }
