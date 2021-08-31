@@ -1,10 +1,16 @@
-class MangaList{
+export default class {
 
-    async getMangaList(params){
-        const url = 'https://api.mangadex.org/manga'
 
-        const data = await $.get(url, params).pipe(function(json) {return json})
-        return data.results
+    constructor(mangaID){
+        this.mangaID = mangaID
+    }
+
+    async getManga(id){
+        const url = `https://api.mangadex.org/manga/${this.mangaID}`
+
+        const data = await $.get(url).pipe(function(json) {return json})
+        
+        return data
         
     }
     async getCover(id,coverId){
@@ -20,9 +26,6 @@ class MangaList{
             return authorList.data.attributes.name
         })
         return authorName
-    }
-    async getDate(params){
-
     }
 
     async mangaListProcess(mangaList){
@@ -45,12 +48,8 @@ class MangaList{
         })
         manga.author = await this.getAuthor(manga.authorId)
         manga.coverLink = await this.getCover(manga.id,manga.coverId)
+        manga.mangaUrl = 'manga/'+manga.id;
 
         return manga      
     }
-
-    
- 
-    
-
 }

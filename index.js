@@ -1,8 +1,7 @@
 const path = require('path')
 const url = require('url')
 const {app, BrowserWindow} = require('electron')
-const { request } = require('https')
-require(__dirname + '/request.js')
+const server = require("./server")
 
 let win
 
@@ -16,11 +15,7 @@ function createWindow() {
     })
 
     
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }))
+    win.loadURL('http://localhost:6060')
 
      
 
