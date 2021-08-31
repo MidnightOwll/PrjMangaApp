@@ -213,15 +213,20 @@ ul.menu li.selected span {
     padding: 5px 15px 5px 10px;
 }
 
-.manga-block img {
-	height: auto;
+#img {
+	height: 100%;
 	width: 100%;
     line-height: 100%;
 }
 
-.manga-block .row {
+.manga-block > .row {
     width: 98%;
-    height: 98%;
+    height:98%;
+    margin: 0;
+}
+
+.row > .col-6 {
+   
 }
 
 .row .border {  
@@ -230,8 +235,9 @@ ul.menu li.selected span {
 }
 
 .manga-block .row .col-6 {
-    padding: 0 0 6px 0 !important;
+    padding: 0 !important;
     margin: 0 !important;
+    height: 100%;
 }
 
     /*-------------*/
