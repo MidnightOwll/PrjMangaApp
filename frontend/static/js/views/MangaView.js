@@ -19,4 +19,6 @@ export default class extends AbstractViews {
             $(main_content).append(result)
         })})
     }
+
+    additionalJS(){}
 }

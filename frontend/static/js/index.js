@@ -48,7 +48,9 @@ const router = async() => {
 
     document.querySelector(main_content).innerHTML = ''
 
-    await view.getHTML(main_content)
+    await view.getHTML(main_content).then(()=>{
+        view.additionalJS()
+    })
 }
 
 window.addEventListener('popstate',router)
