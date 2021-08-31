@@ -15,6 +15,7 @@ export default class extends AbstractViews {
         
        manga.getManga().then(list => {
         manga.mangaListProcess(list).then(oneManga =>{
+            this.setTitle(oneManga.title)
             let result = template(oneManga)
             $(main_content).append(result)
         })})
