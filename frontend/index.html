@@ -24,36 +24,24 @@
                                 
                        
             <div class="container menubar" >
-
+               
                 <form role="search" class="form-inline" action="" method="">
                     <input class="form-control mr-sm-2 bg-light" type="search" placeholder="Search" aria-label="Search" id="searchLab">
                     <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
-                <div class="menubar-btn btn-group">
-                    <button type="button" class="btn" data-bs-toggle="dropdown" id="menu-btn" aria-expanded="false">
-                        <span class="buttonBase">something</span>
-                    </button>
-                    <ul class="dropdown-menu bg-dark text-white" id="listM" aria-labelledby="menu-btn"> </ul> 
-                </div>
-
-				<ul class="menu">
-                    <div  id="menubarList">
-                        <li class=""> <span class="buttonBase">something</span></li>	
-                        <li class="selected"><span class="buttonBase">something</span></li>
-                        <li class="dropdown">
-                            <span id="drop1" href="#" class="buttonBase" data-toggle="dropdown">
-                                something
-                                <span class="caret"></span>
-                            </span>
-                            <ul class="dropdown-menu bg-dark">
-                                <li><span class="buttonBase">something</span></li>
-                                <li><span class="buttonBase">something</span></li>
-                                <li><span class="buttonBase">something</span></li>
-                            </ul>
-                        </li>
+                <div id="sidebar">
+                    <div class="toggle-btn" onclick="openMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
-				</ul>
+                    <ul>
+                        <li>Menu</li>
+                        <li><a href="#">var 1</a></li>
+                        <li><a href="#">var 2</a></li>
+                    </ul>
+                </div>
 
 			</div>
                           
@@ -147,9 +135,14 @@
     <script type = 'module' src="/static/js/index.js"></script>
     
     <script>
-      
+
+             
         // меню
-        $('#menubarList').clone().appendTo('#listM')
+        $('#sidebar').click(()=>{
+            $('#sidebar').toggleClass('act')
+            $('#sidebar').toggleClass('btn-pozit')
+        })
+        
                     
         // отображение поисковой формы 
         $('#searchLab').focus(() => {
@@ -188,9 +181,14 @@
             if (scrolled > 100 && scrolled > prevScroll) {
                 $scrll.addClass("menu-out")
                 lastShowPos = scrolled
+                $('#sidebar').removeClass('act')
+                $('#sidebar').removeClass('btn-pozit')
             } else if (scrolled <= Math.max(lastShowPos - 150, 0)) {
                 $scrll.removeClass("menu-out")
+                $('#sidebar').removeClass('act')
+                $('#sidebar').removeClass('btn-pozit')
             }
+            
             prevScroll = scrolled
         })
     </script>

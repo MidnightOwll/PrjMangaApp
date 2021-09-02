@@ -89,26 +89,12 @@ div.navigation {
     margin: 10px 20px 0 10px;
 }
 
-ul.menu {
-	float: right;
-    padding: 0;
-}
-
-ul.menu li {
-	float: left;
-	list-style: none;
-}
-ul.dropdown-menu li {
-    padding: 0 20% 0 20%;
-    width: auto;
-}
-
 form[role="search"] {
     float: left;
     font: normal 115% 'trebuchet ms', sans-serif;
 }
 form[role="search"] input.form-control  {
-    width: 90px;
+    width: 150px;
     float: left;    
 }
 
@@ -148,6 +134,9 @@ ul.menu li.selected span {
 
 .manga-block {
     height: 310px;
+    width: 440px;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .manga-block span {
@@ -158,15 +147,42 @@ ul.menu li.selected span {
      
 }
 
-.manga-box > span#title {
-    font: normal 105% 'URW Chancery L', cursive;
-    text-align: center;
+.manga-box > span#author {
+    width: auto;
     overflow: hidden;
-    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;  
-    -webkit-line-clamp: 2;   
+    -webkit-line-clamp: 1;
 }
+
+span#description {
+    
+    width: auto; 
+    text-align: justify;   
+    overflow: hidden;
+    display: -webkit-box;     
+    -webkit-box-orient: vertical;  
+    -webkit-line-clamp: 7; 
+    
+}
+
+.manga-box {
+    padding: 5px 15px 5px 10px;
+}
+
+.manga-box > span#title {
+    font: normal 105% 'URW Chancery L', cursive;
+    text-align: center;     
+}
+.manga-box > a {
+    text-decoration: none;
+    color: #fff;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;  
+    -webkit-line-clamp: 2; 
+}
+
 
 .tags{
     font-size: 75%;
@@ -184,33 +200,6 @@ ul.menu li.selected span {
 
 .flex-grow {
     flex-grow:4;
-}
-
-.manga-box > span#author {
-    width: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;  
-    -webkit-line-clamp: 1;
-}
-
-.manga-box > span#description {
-    width: auto;    
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;  
-    -webkit-line-clamp: 7;
-    text-align: justify;
-}
-
-.manga-block {	
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.manga-box {
-    padding: 5px 15px 5px 10px;
 }
 
 #img {
@@ -245,9 +234,6 @@ ul.menu li.selected span {
     div.menubar{
         width: 45%;
     }
-    ul.menu {
-        display: none;
-    } 
     div.menubar-btn {
         display: block;
         float: right top;
@@ -316,5 +302,72 @@ ul.menu li.selected span {
     padding-bottom: 10px;
 }
 
+/* sidebar menu*/
+#sidebar {
+    right: -254px;
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background: #212529;
+    border-left: 4px solid #dad7d5;
+    transition: all 0.5s;
+}
+
+#sidebar.act {
+    /* right: 0; */
+    transform: translateX(-100%);
+    transition: all 0.5s;
+}
+#sidebar.btn-pozit .toggle-btn {
+    right: 200px;
+    transition: all 0.5s;
+}
 
 
+#sidebar >ul {
+    padding: 0;
+}
+
+#sidebar >ul >li:first-child {
+    text-align:center;
+    color: white;
+    font-size: 180%;
+    list-style: none;
+    padding: 0 5px 5px 5px;
+}
+
+#sidebar >ul >li:not(:first-child) {
+    width: 80%;
+    margin: 0 10% 0 10%;
+    color: white;
+    font-size: 120%;
+    list-style: none;
+}
+
+#sidebar >ul >li >a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#sidebar > .toggle-btn {
+    position: absolute;
+    right: 270px;
+    padding: 6px;
+    border: 2px solid #fff;
+    border-radius: 12px;
+    cursor: pointer; 
+    height: 38px;
+}
+
+#sidebar > .toggle-btn > span{
+    display: block;
+    width: 25px;
+    height: 20%;
+    margin-bottom: 20%;
+    background-color: #666;
+}
+
+#sidebar > .toggle-btn> span:last-child{margin-bottom: 0;}
+
+#sidebar > .toggle-btn:hover {background: #556270;}
+#sidebar > .toggle-btn:hover >span {background: #fafafa;}
