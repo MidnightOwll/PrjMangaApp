@@ -19,7 +19,13 @@ export default class {
             if (key === 'data') {              
                 $.extend(manga, {id: val.id})
                 $.extend(manga, {title: val.attributes.title.en ||  val.attributes.title.jp})
-                $.extend(manga, {description: val.attributes.description.en})                                                       
+                $.extend(manga, {description: val.attributes.description.en})    
+                $.extend(manga, {tags: {}})
+                $.each(val.attributes.tags, (idx, value) => {
+                    //console.log(value)
+                    $.extend(manga.tags, {[idx]: value.attributes.name.en})
+                })
+                                                                  
             }
             else if (key === 'relationships') {                            
                 $.each(val, (idx, value) => {
@@ -33,8 +39,8 @@ export default class {
         })
         manga.author = await mangaClass.getAuthor(manga.authorId)
         manga.coverLink = await mangaClass.getCover(manga.id,manga.coverId)
-        manga.mangaUrl = 'manga/'+manga.id;
-
+        manga.mangaUrl = 'manga/'+manga.id
+        //console.log(manga)
         return manga      
     }
 }

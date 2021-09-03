@@ -31,7 +31,7 @@
                 </form>
 
                 <div id="sidebar">
-                    <div class="toggle-btn" onclick="openMenu">
+                    <div class="toggle-btn">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -81,7 +81,14 @@
                         <span>Author: </span><span id="author">{{author}}</span>                            
                     </div>
                     <div class="manga-box">
-                        <span>Teg: </span> <div><span class="tags">1111</span><span class="tags">2222</span><span class="tags">3333</span></div>                            
+                        <span>Tags:</span> 
+                        <div>
+                            {{#each tags}}
+                                {{#iff @index '<' 4}}
+                                    <span class="tags">{{this}}</span>
+                                {{/iff}}
+                            {{/each}}                         
+                        </div>                            
                     </div>
                     <div class="manga-box flex-grow">
                         <span>Description: </span><span id="description">{{description}}</span>                            
@@ -111,13 +118,10 @@
                         <span>Author: </span><span id="author">{{author}}</span>                            
                     </div>
                     <div class="box">
-                        <span>Teg: </span> <span class="tags">Default</span>  <span class="tags">Default</span>
-                        <span class="tags">Default</span><span class="tags">Default</span>
-                        <span class="tags">Default</span><span class="tags">Default</span>
-                        <span class="tags">Default</span><span class="tags">Default</span>                     
-                        <span class="tags">Default</span><span class="tags">Default</span>
-                        <span class="tags">Default</span><span class="tags">Default</span>
-                        <span class="tags">Default</span><span class="tags">Default</span>
+                        <span>Tags: </span> 
+                        {{#each tags}}                        
+                            <span class="tags">{{this}}</span>                        
+                        {{/each}} 
                     </div>
                     <div class="box">
                         <span>Description: </span><span id="description">{{description}}</span>                            
@@ -179,14 +183,16 @@
         const scrolled = $(window).scrollTop()
 
             if (scrolled > 100 && scrolled > prevScroll) {
+                $('#sidebar').removeClass('act')
+                $('#sidebar').removeClass('btn-pozit')
                 $scrll.addClass("menu-out")
                 lastShowPos = scrolled
-                $('#sidebar').removeClass('act')
-                $('#sidebar').removeClass('btn-pozit')
+                
             } else if (scrolled <= Math.max(lastShowPos - 150, 0)) {
-                $scrll.removeClass("menu-out")
                 $('#sidebar').removeClass('act')
                 $('#sidebar').removeClass('btn-pozit')
+                $scrll.removeClass("menu-out")
+                
             }
             
             prevScroll = scrolled

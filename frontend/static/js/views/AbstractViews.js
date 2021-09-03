@@ -11,7 +11,7 @@ export default class {
     }
 
     async getHTML(){
-        return '';
+        return ''
     }
 
     additionalJS(){}

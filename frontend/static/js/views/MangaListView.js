@@ -1,6 +1,7 @@
 import AbstractViews from "./AbstractViews.js"
 import MangaList from "../models/MangaList.js";
 
+
 export default class extends AbstractViews {
     constructor(params){
         super(params)
@@ -30,8 +31,31 @@ export default class extends AbstractViews {
     }
 
     additionalJS(){
-
-
+        
+        //нужно как-то вынести этот хелпер в папку helpers
+        Handlebars.registerHelper('iff', function(a, operator, b, opts) {
+            var bool = false;
+            switch(operator) {
+                case '==':
+                    bool = a == b
+                    break;
+                case '>':
+                    bool = a > b
+                    break;
+                case '<':
+                    bool = a < b
+                    break
+                default:
+                    throw "Unknown operator " + operator
+            }
+            
+            if (bool) {
+                return opts.fn(this)
+            } else {
+                return opts.inverse(this)
+            }
+        })        
+        /**/
         let currentManga = document.querySelector('#currentManga').innerHTML
         let template = Handlebars.compile(currentManga);
         let offset=15 //переменная счетчик
