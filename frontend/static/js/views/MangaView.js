@@ -1,5 +1,6 @@
 import AbstractViews from "./AbstractViews.js"
-import Manga from "../models/Manga.js";
+import Manga from "../models/Manga.js"
+
 
 export default class extends AbstractViews {
     constructor(params){
@@ -8,10 +9,10 @@ export default class extends AbstractViews {
 
 
     async getHTML(main_content) {
-
-        let manga = new Manga(this.params.mangaId);
+        let manga = new Manga(this.params.mangaId)
         let currentManga = document.querySelector('#mangaPage').innerHTML
-        let template = Handlebars.compile(currentManga);
+        let template = Handlebars.compile(currentManga)
+        
         
        manga.getManga().then(list => {
         manga.mangaListProcess(list).then(oneManga =>{

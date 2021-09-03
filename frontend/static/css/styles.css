@@ -155,19 +155,19 @@ ul.menu li.selected span {
     -webkit-line-clamp: 1;
 }
 
-span#description {
+.manga-box >span#description {
     
     width: auto; 
     text-align: justify;   
     overflow: hidden;
     display: -webkit-box;     
     -webkit-box-orient: vertical;  
-    -webkit-line-clamp: 7; 
+    -webkit-line-clamp: 6; 
     
 }
 
 .manga-box {
-    padding: 5px 15px 5px 10px;
+    padding: 2px 10px;
 }
 
 .manga-box > span#title {
@@ -311,6 +311,7 @@ span#description {
     background: #212529;
     border-left: 4px solid #dad7d5;
     transition: all 0.5s;
+    opacity: .95;
 }
 
 #sidebar.act {
