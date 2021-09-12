@@ -31,27 +31,32 @@ export default class {
     async mangaListProcess(mangaList){
         let manga=[]
         $.each(mangaList, (key, val) => {
+            //console.log(val)
             if (key === 'data') {              
                 $.extend(manga, {id: val.id})
                 $.extend(manga, {title: val.attributes.title.en ||  val.attributes.title.jp})
-                $.extend(manga, {description: val.attributes.description.en}) 
+                $.extend(manga, {description: val.attributes.description.en})    
                 $.extend(manga, {tags: {}})
+                $.extend(manga, {authorsIds: {}})
                 $.each(val.attributes.tags, (idx, value) => {
                     //console.log(value)
                     $.extend(manga.tags, {[idx]: value.attributes.name.en})
-                })                                                      
-            }
-            else if (key === 'relationships') {                            
-                $.each(val, (idx, value) => {
+                })
+                     
+                //console.log(val)                      
+                $.each(val.relationships, (idx, value) => {
+                   // console.log(idx)
                     if(value['type']  === 'author') {
-                        $.extend(manga, {authorId: value.id})
+                        //console.log(value)
+                        $.extend(manga.authorsIds, {[idx]: value.id})
                     } else if(value['type']  === 'cover_art'){
                         $.extend(manga, {coverId: value.id})
                     }
                 })         
-            }
+        }
         })
-        manga.author = await this.getAuthor(manga.authorId)
+        console.log(manga)
+        manga.author = await this.getAuthor(manga.authorsIds[0])
         manga.coverLink = await this.getCover(manga.id,manga.coverId)
         manga.mangaUrl = 'manga/'+manga.id
 
